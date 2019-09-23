@@ -1,0 +1,45 @@
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="sqlContext" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <!--Extends BaseMapper-->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.kangyonggan.demo.plugins.BaseMapper"/>
+        </plugin>
+
+        <!--Serialize-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <!--Lombok-->
+        <plugin type="com.kangyonggan.demo.plugins.LombokPlugin"/>
+
+        <!--Jdbc Connect-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/demodb?nullCatalogMeansCurrent=true"
+                        userId="root" password="123456"/>
+
+        <!--TableName.java-->
+        <javaModelGenerator targetPackage="com.kangyonggan.demo.model"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!--TableNameMapper.xml-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!--TableNameMapper.java-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.kangyonggan.demo.mapper"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--Table name-->
+        <table tableName="tb_user" domainObjectName="User">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>
